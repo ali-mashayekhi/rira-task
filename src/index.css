@@ -1,0 +1,37 @@
+@font-face {
+  font-family: "anjoman";
+  src: url("/fonts/Anjoman-Regular.woff");
+
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "anjoman";
+  src: url("/fonts/Anjoman-Medium.woff");
+  font-weight: 500;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "anjoman";
+}
+
+.remove-select-arrow {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+}
+
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.remove-arrow {
+  -moz-appearance: textfield;
+}
