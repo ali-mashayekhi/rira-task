@@ -9,7 +9,7 @@ export default function ConvertForm({
   inputUnit,
   setInputUnit,
 }: {
-  exchangeRate: { rate: null | number };
+  exchangeRate: number | null;
   inputUnit: "IRR" | "USD";
   setInputUnit: Dispatch<SetStateAction<"IRR" | "USD">>;
 }) {
@@ -22,10 +22,10 @@ export default function ConvertForm({
     if (!inputRef.current) return;
     const inputValue = +inputRef.current.value;
     if (inputValue === 0) return;
-    if (!exchangeRate.rate) return;
+    if (!exchangeRate) return;
 
     // 2. Convert to final form
-    setConvertedValue(convertToFinal(inputValue, exchangeRate.rate, inputUnit));
+    setConvertedValue(convertToFinal(inputValue, exchangeRate, inputUnit));
   }
 
   return (

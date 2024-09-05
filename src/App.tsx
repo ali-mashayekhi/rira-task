@@ -4,22 +4,22 @@ import ConvertRate from "./components/ConvertRate";
 import useConvertRate from "./hooks/use-convert-rate";
 
 export default function App() {
-  const exchangeRate = useConvertRate();
+  const { data: exchangeRate, pending, error } = useConvertRate();
   const [inputUnit, setInputUnit] = useState<"IRR" | "USD">("IRR");
 
   return (
-    <main className="bg-gray-100 w-screen h-screen flex justify-center items-center flex-col">
+    <main className="flex flex-col items-center justify-center w-screen h-screen bg-gray-100">
       <div>
         <ConvertForm
-          exchangeRate={exchangeRate.data}
+          exchangeRate={exchangeRate.rate}
           inputUnit={inputUnit}
           setInputUnit={setInputUnit}
         />
 
-        {exchangeRate.pending ? (
-          <p>در حال دریافت اطلاعات...</p>
-        ) : (
-          <ConvertRate exchangeRate={exchangeRate.data} inputUnit={inputUnit} />
+        {pending && <p>در حال دریافت اطلاعات...</p>}
+        {error && <p>خطا در برقراری ارتباط لطفا دوباره تلاش کنید</p>}
+        {exchangeRate.rate && (
+          <ConvertRate exchangeRate={exchangeRate.rate} inputUnit={inputUnit} />
         )}
       </div>
     </main>
