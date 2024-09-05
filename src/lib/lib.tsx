@@ -3,9 +3,11 @@ import { currencies } from "../constants/constants";
 export function toDollor(inputValue: number, exchangeRate: number) {
   return inputValue * (1 / exchangeRate);
 }
+
 export function toRial(inputValue: number, exchangeRate: number) {
   return inputValue * exchangeRate;
 }
+
 export function convertToFinal(
   inputValue: number,
   exchangeRate: number,
@@ -22,6 +24,7 @@ export function getInputPlaceHolder(inputUnit: "IRR" | "USD") {
 export function getInputUnit(inputUnit: "IRR" | "USD") {
   return currencies.find((currency) => currency.value === inputUnit);
 }
+
 export function getOutputUnit(inputUnit: "IRR" | "USD") {
   return currencies.find((currency) => currency.value !== inputUnit);
 }
