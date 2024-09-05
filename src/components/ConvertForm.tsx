@@ -1,5 +1,5 @@
 import { Dispatch, FormEvent, SetStateAction, useRef, useState } from "react";
-import { toDollor, toRial } from "../lib/lib";
+import { convertToFinal } from "../lib/lib";
 import ConvertFormResult from "./ConvertFormResult";
 import GetInput from "./GetInput";
 import Button from "./UI/Button";
@@ -25,12 +25,7 @@ export default function ConvertForm({
     if (!exchangeRate.rate) return;
 
     // 2. Convert to final form
-    if (inputUnit === "IRR") {
-      setConvertedValue(toDollor(inputValue, exchangeRate.rate));
-    }
-    if (inputUnit === "USD") {
-      setConvertedValue(toRial(inputValue, exchangeRate.rate));
-    }
+    setConvertedValue(convertToFinal(inputValue, exchangeRate.rate, inputUnit));
   }
 
   return (
