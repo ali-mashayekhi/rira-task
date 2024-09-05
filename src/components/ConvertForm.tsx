@@ -1,10 +1,15 @@
 import { Dispatch, FormEvent, SetStateAction, useRef, useState } from "react";
-import { currencies } from "../constants/constants";
-import CurrencySelector from "./CurrencySelector";
-import Button from "./UI/Button";
+import {
+  getInputPlaceHolder,
+  getInputUnit,
+  getOutputUnit,
+  toDollor,
+  toRial,
+} from "../lib/lib";
 import ConvertFormResult from "./ConvertFormResult";
-import { toDollor, toRial } from "../lib/lib";
+import CurrencySelector from "./CurrencySelector";
 import SwapUnit from "./SwapUnit";
+import Button from "./UI/Button";
 
 export default function ConvertForm({
   exchangeRate,
@@ -51,22 +56,12 @@ export default function ConvertForm({
             className="bg-white h-14 focus:outline-none remove-arrow"
             ref={inputRef}
             type="number"
-            placeholder={
-              inputUnit === "IRR" ? "مقدار به ریال" : "مقدار به دلار"
-            }
+            placeholder={getInputPlaceHolder(inputUnit)}
           />
-          <CurrencySelector
-            activeCurrency={currencies.find(
-              (currency) => currency.value === inputUnit
-            )}
-          />
+          <CurrencySelector activeCurrency={getInputUnit(inputUnit)} />
         </div>
         <SwapUnit setInputUnit={setInputUnit} />
-        <CurrencySelector
-          activeCurrency={currencies.find(
-            (currency) => currency.value !== inputUnit
-          )}
-        />
+        <CurrencySelector activeCurrency={getOutputUnit(inputUnit)} />
       </div>
       <ConvertFormResult
         convertedValue={convertedValue}
