@@ -14,14 +14,16 @@ export default function ConvertFormResult({
       }`}
     >
       <div className="overflow-hidden font-medium">
-        <p className="text-sm text-gray-400">
-          {inputRef.current?.value}
-          {inputUnit === "IRR" ? "ریال" : "دلار"} =
-        </p>
-        <p>
-          {convertedValue?.toFixed(inputUnit === "USD" ? 2 : 8)}{" "}
-          {inputUnit === "USD" ? "ریال" : "دلار"}
-        </p>
+        <div className="py-2">
+          <p className="mb-1 text-sm text-gray-400">
+            {inputRef.current?.value}
+            {inputUnit === "IRR" ? "ریال" : "دلار"} =
+          </p>
+          <p>
+            {convertedValue?.toFixed(inputUnit === "USD" ? 2 : 8)}{" "}
+            {inputUnit === "USD" ? "ریال" : "دلار"}
+          </p>
+        </div>
       </div>
     </div>
   );

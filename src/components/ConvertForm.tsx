@@ -1,14 +1,7 @@
 import { Dispatch, FormEvent, SetStateAction, useRef, useState } from "react";
-import {
-  getInputPlaceHolder,
-  getInputUnit,
-  getOutputUnit,
-  toDollor,
-  toRial,
-} from "../lib/lib";
+import { toDollor, toRial } from "../lib/lib";
 import ConvertFormResult from "./ConvertFormResult";
-import CurrencySelector from "./CurrencySelector";
-import SwapUnit from "./SwapUnit";
+import GetInput from "./GetInput";
 import Button from "./UI/Button";
 
 export default function ConvertForm({
@@ -23,10 +16,7 @@ export default function ConvertForm({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [convertedValue, setConvertedValue] = useState<number | null>(null);
 
-  function submitHandler(
-    e: FormEvent,
-    setConvertedValue: React.Dispatch<React.SetStateAction<number | null>>
-  ) {
+  function submitHandler(e: FormEvent) {
     e.preventDefault();
     // 1. Check existanseof values
     if (!inputRef.current) return;
@@ -46,23 +36,13 @@ export default function ConvertForm({
   return (
     <form
       className="w-full max-w-screen-sm px-10 py-8 mb-3 bg-white rounded-lg shadow-sm"
-      onSubmit={(e) => {
-        submitHandler(e, setConvertedValue);
-      }}
+      onSubmit={submitHandler}
     >
-      <div className="flex items-center gap-2 mb-3">
-        <div className="bg-white flex h-16 items-center justify-between border-[rgb(221, 221, 221)] border-[1px] rounded-md focus-within:border-blue-500 px-2">
-          <input
-            className="bg-white h-14 focus:outline-none remove-arrow"
-            ref={inputRef}
-            type="number"
-            placeholder={getInputPlaceHolder(inputUnit)}
-          />
-          <CurrencySelector activeCurrency={getInputUnit(inputUnit)} />
-        </div>
-        <SwapUnit setInputUnit={setInputUnit} />
-        <CurrencySelector activeCurrency={getOutputUnit(inputUnit)} />
-      </div>
+      <GetInput
+        inputUnit={inputUnit}
+        setInputUnit={setInputUnit}
+        ref={inputRef}
+      />
       <ConvertFormResult
         convertedValue={convertedValue}
         inputRef={inputRef}
