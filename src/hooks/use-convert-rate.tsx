@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import getConvertRate from "../lib/data-service";
 
 export default function useConvertRate() {
   const [data, setData] = useState<{ rate: null | number }>({ rate: null });
@@ -6,29 +7,22 @@ export default function useConvertRate() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchData();
+    // Using IIFE function call to use async function inside useEffect
+    (async function fetchData() {
+      try {
+        const result = await getConvertRate();
+        setData({ rate: (+result.usd.irr + 17646) * 10 });
+        setPending(false);
+      } catch (error) {
+        if (typeof error === "string") {
+          setError(error);
+        } else if (error instanceof Error) {
+          setError(error.message);
+        }
+        setPending(false);
+      }
+    })();
   }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json"
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok.");
-      }
-      const result = await response.json();
-      setData({ rate: (+result.usd.irr + 17646) * 10 });
-      setPending(false);
-    } catch (error) {
-      if (typeof error === "string") {
-        setError(error);
-      } else if (error instanceof Error) {
-        setError(error.message);
-      }
-      setPending(false);
-    }
-  };
 
   return { data, pending, error };
 }

@@ -18,7 +18,7 @@ export default function ConvertForm({
 
   function submitHandler(e: FormEvent) {
     e.preventDefault();
-    // 1. Check existanseof values
+    // 1. Check existanse of values
     if (!inputRef.current) return;
     const inputValue = +inputRef.current.value;
     if (inputValue === 0) return;
