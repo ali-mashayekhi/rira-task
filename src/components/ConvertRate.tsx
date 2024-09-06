@@ -8,7 +8,7 @@ export default function ConvertRate({
   if (!exchangeRate) return;
 
   return (
-    <div className="self-start px-10 font-medium">
+    <div className="self-start px-3 font-medium sm:px-10">
       <p className="text-gray-400">نرخ تبدیل</p>
       {inputUnit === "IRR" ? (
         <p>1 ریال = {(1 * (1 / exchangeRate)).toFixed(8)} دلار</p>

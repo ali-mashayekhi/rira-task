@@ -8,8 +8,8 @@ export default function App() {
   const [inputUnit, setInputUnit] = useState<"IRR" | "USD">("IRR");
 
   return (
-    <main className="flex flex-col items-center justify-center w-screen h-screen bg-gray-100">
-      <div>
+    <main className="flex items-center justify-center w-screen h-screen bg-gray-100">
+      <div className="max-w-xl grow">
         <ConvertForm
           exchangeRate={exchangeRate.rate}
           inputUnit={inputUnit}

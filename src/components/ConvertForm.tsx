@@ -30,7 +30,7 @@ export default function ConvertForm({
 
   return (
     <form
-      className="w-full max-w-screen-sm px-10 py-8 mb-3 bg-white rounded-lg shadow-sm"
+      className="px-3 py-8 mb-3 bg-white rounded-lg shadow-sm sm:px-10"
       onSubmit={submitHandler}
     >
       <GetInput

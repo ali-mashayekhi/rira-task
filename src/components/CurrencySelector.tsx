@@ -12,9 +12,13 @@ export default function CurrencySelector({
 }) {
   if (!activeCurrency) return;
   return (
-    <div className="bg-blue-300 text-white rounded-md py-2 min-w-28 flex justify-center gap-3 items-center">
-      <img src={activeCurrency.flag} alt={activeCurrency.alt} className="w-5" />
-      <p>{activeCurrency.content}</p>
+    <div className="flex items-center justify-center gap-2 py-2 text-white bg-blue-300 rounded-md min-w-16 sm:min-w-28 md:gap-3">
+      <img
+        src={activeCurrency.flag}
+        alt={activeCurrency.alt}
+        className="w-4 sm:w-5"
+      />
+      <p className="text-sm sm:text-base">{activeCurrency.content}</p>
     </div>
   );
 }
