@@ -1,3 +1,5 @@
+import { toCurrencyFormat } from "../lib/lib";
+
 export default function ConvertFormResult({
   inputRef,
   inputUnit,
@@ -7,6 +9,10 @@ export default function ConvertFormResult({
   inputUnit: "IRR" | "USD";
   convertedValue: number | null;
 }) {
+  if (convertedValue === null) return;
+  const value =
+    inputRef.current?.value !== undefined ? +inputRef.current?.value : 0;
+
   return (
     <div
       className={`grid duration-300 mb-3 ${
@@ -16,11 +22,11 @@ export default function ConvertFormResult({
       <div className="overflow-hidden font-medium">
         <div className="py-2">
           <p className="mb-1 text-sm text-gray-400">
-            {inputRef.current?.value}
+            {toCurrencyFormat(value)}
             {inputUnit === "IRR" ? "ریال" : "دلار"} =
           </p>
           <p>
-            {convertedValue?.toFixed(inputUnit === "USD" ? 2 : 8)}{" "}
+            {toCurrencyFormat(convertedValue)}{" "}
             {inputUnit === "USD" ? "ریال" : "دلار"}
           </p>
         </div>

@@ -1,3 +1,5 @@
+import { toCurrencyFormat, toDollor, toRial } from "../lib/lib";
+
 export default function ConvertRate({
   exchangeRate,
   inputUnit,
@@ -11,9 +13,9 @@ export default function ConvertRate({
     <div className="self-start px-3 font-medium sm:px-10">
       <p className="text-gray-400">نرخ تبدیل</p>
       {inputUnit === "IRR" ? (
-        <p>1 ریال = {(1 * (1 / exchangeRate)).toFixed(8)} دلار</p>
+        <p>1 ریال = {toCurrencyFormat(toDollor(1, exchangeRate))} دلار</p>
       ) : (
-        <p>1 دلار = {(1 * exchangeRate).toFixed(2)} ریال</p>
+        <p>1 دلار = {toCurrencyFormat(toRial(1, exchangeRate))} ریال</p>
       )}
     </div>
   );

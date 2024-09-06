@@ -28,3 +28,9 @@ export function getInputUnit(inputUnit: "IRR" | "USD") {
 export function getOutputUnit(inputUnit: "IRR" | "USD") {
   return currencies.find((currency) => currency.value !== inputUnit);
 }
+
+export function toCurrencyFormat(input: number) {
+  const f = new Intl.NumberFormat();
+  if (input < 1) return input.toFixed(8);
+  return f.format(input);
+}
